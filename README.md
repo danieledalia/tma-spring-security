@@ -26,7 +26,7 @@ mvn clean install
 <dependency>
     <groupId>io.github.danieledalia</groupId>
     <artifactId>tma-spring-boot-starter</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
 </dependency>
 ```
 
@@ -76,7 +76,7 @@ Add the security module for `@AuthenticationPrincipal` support:
 <dependency>
     <groupId>io.github.danieledalia</groupId>
     <artifactId>tma-spring-security</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
 </dependency>
 ```
 
