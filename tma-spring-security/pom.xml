@@ -6,7 +6,8 @@
     <parent>
         <groupId>io.github.danieledalia</groupId>
         <artifactId>tma-spring-security-parent</artifactId>
-        <version>0.1.0</version>
+        <version>0.1.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>tma-spring-security</artifactId>
