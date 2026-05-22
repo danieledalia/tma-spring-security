@@ -22,6 +22,8 @@ mvn clean install
 
 ### 1. Add dependency
 
+> **Maven Central publication pending.** Until then, install locally with `mvn clean install`.
+
 ```xml
 <dependency>
     <groupId>io.github.danieledalia</groupId>
