@@ -1,0 +1,7 @@
+telegram:
+  miniapp:
+    enabled: true
+    bot-token: ${TELEGRAM_BOT_TOKEN:replace-me}
+    header-name: X-Telegram-Init-Data
+    max-auth-age: 1h
+    fail-on-missing-header: false
