@@ -1,6 +1,14 @@
 # tma-spring-security
 
-Validate Telegram Mini App `initData` in your Spring Boot backend. One dependency, one config line, done.
+[![CI](https://github.com/danieledalia/tma-spring-security/actions/workflows/ci.yml/badge.svg)](https://github.com/danieledalia/tma-spring-security/actions/workflows/ci.yml)
+![Java 17+](https://img.shields.io/badge/Java-17%2B-blue)
+![Spring Boot 3.5.x](https://img.shields.io/badge/Spring%20Boot-3.5.x-green)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+Validate Telegram Mini App `initData` in your Spring Boot backend.  
+One dependency, one config line, done.
+
+---
 
 ## Quick Start
 
@@ -40,7 +48,6 @@ That's it. Requests without a valid Telegram signature get a `401`.
 Send `Telegram.WebApp.initData` in a header with every request:
 
 ```javascript
-// Telegram Mini App frontend
 const response = await fetch('https://your-backend.com/api/me', {
   headers: {
     'X-Telegram-Init-Data': window.Telegram.WebApp.initData
@@ -53,40 +60,40 @@ const user = await response.json();
 
 ---
 
+## How it works
+
+```
+┌─────────────────┐       X-Telegram-Init-Data       ┌─────────────────────┐
+│  Telegram Mini  │ ─────────────────────────────────▶│   Spring Boot App   │
+│      App        │                                   │                     │
+└─────────────────┘                                   │  1. Read header     │
+                                                      │  2. Verify HMAC     │
+                                                      │  3. Check auth_date │
+                                                      │  4. Inject user ✓   │
+                                                      └─────────────────────┘
+```
+
+---
+
 ## Configuration
 
-| Property | Default | Description |
-|----------|---------|-------------|
-| `telegram.miniapp.bot-token` | — | Your Telegram bot token (required) |
-| `telegram.miniapp.header-name` | `X-Telegram-Init-Data` | HTTP header to read initData from |
-| `telegram.miniapp.max-auth-age` | `1h` | Reject initData older than this |
-| `telegram.miniapp.fail-on-missing-header` | `false` | Return 401 if header is absent |
-| `telegram.miniapp.enabled` | `true` | Disable the filter entirely |
+| Property                              | Default                | Description                        |
+| ------------------------------------- | ---------------------- | ---------------------------------- |
+| `telegram.miniapp.bot-token`          | —                      | Your Telegram bot token (required) |
+| `telegram.miniapp.header-name`        | `X-Telegram-Init-Data` | HTTP header to read initData from  |
+| `telegram.miniapp.max-auth-age`       | `1h`                   | Reject initData older than this    |
+| `telegram.miniapp.fail-on-missing-header` | `false`            | Return 401 if header is absent     |
+| `telegram.miniapp.enabled`            | `true`                 | Disable the filter entirely        |
 
 ---
 
 ## Modules
 
-| Module | Purpose |
-|--------|---------|
-| `tma-core` | Pure Java parser & HMAC-SHA256 validator (no Spring) |
-| `tma-spring-boot-starter` | Auto-configuration, servlet filter, `@TelegramMiniAppUser` |
-| `tma-spring-security` | Optional Spring Security `AuthenticationToken` integration |
-
----
-
-## How it works
-
-```
-┌─────────────────┐         X-Telegram-Init-Data         ┌─────────────────────┐
-│  Telegram Mini  │ ──────────────────────────────────▶   │   Spring Boot App   │
-│      App        │                                       │                     │
-└─────────────────┘                                       │  1. Read header     │
-                                                          │  2. Verify HMAC     │
-                                                          │  3. Check auth_date │
-                                                          │  4. Inject user ✓   │
-                                                          └─────────────────────┘
-```
+| Module                    | Purpose                                                      |
+| ------------------------- | ------------------------------------------------------------ |
+| `tma-core`                | Pure Java parser & HMAC-SHA256 validator (no Spring)         |
+| `tma-spring-boot-starter` | Auto-configuration, servlet filter, `@TelegramMiniAppUser`  |
+| `tma-spring-security`     | Optional Spring Security `AuthenticationToken` integration   |
 
 ---
 
