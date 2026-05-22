@@ -12,6 +12,8 @@
 
     <artifactId>tma-spring-security</artifactId>
     <packaging>jar</packaging>
+    <name>tma-spring-security</name>
+    <description>Spring Security integration for Telegram Mini Apps initData validation.</description>
 
     <dependencies>
         <dependency>

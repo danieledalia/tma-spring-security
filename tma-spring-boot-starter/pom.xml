@@ -12,6 +12,8 @@
 
     <artifactId>tma-spring-boot-starter</artifactId>
     <packaging>jar</packaging>
+    <name>tma-spring-boot-starter</name>
+    <description>Spring Boot auto-configuration for Telegram Mini Apps initData validation.</description>
 
     <dependencies>
         <dependency>

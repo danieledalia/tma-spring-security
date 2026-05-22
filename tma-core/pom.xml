@@ -12,6 +12,8 @@
 
     <artifactId>tma-core</artifactId>
     <packaging>jar</packaging>
+    <name>tma-core</name>
+    <description>Pure Java parser and HMAC-SHA256 validator for Telegram Mini Apps initData.</description>
 
     <dependencies>
         <dependency>

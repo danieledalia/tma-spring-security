@@ -12,6 +12,12 @@
 
     <artifactId>spring-boot-demo</artifactId>
     <packaging>jar</packaging>
+    <name>spring-boot-demo</name>
+    <description>Example Spring Boot application using tma-spring-boot-starter.</description>
+
+    <properties>
+        <maven.deploy.skip>true</maven.deploy.skip>
+    </properties>
 
     <dependencies>
         <dependency>
