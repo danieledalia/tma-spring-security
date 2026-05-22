@@ -5,12 +5,20 @@
 ![Spring Boot 3.5.x](https://img.shields.io/badge/Spring%20Boot-3.5.x-green)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+> **Pre-release** — API may change before `0.1.0`. Not yet published to Maven Central.
+
 Validate Telegram Mini App `initData` in your Spring Boot backend.  
 One dependency, one config line, done.
 
 ---
 
 ## Quick Start
+
+### Install locally
+
+```bash
+mvn clean install
+```
 
 ### 1. Add dependency
 
@@ -55,8 +63,33 @@ const response = await fetch('https://your-backend.com/api/me', {
 });
 
 const user = await response.json();
-// { "id": 123456, "firstName": "Daniele", "username": "daniele", ... }
+// { "id": 123456, "first_name": "Daniele", "username": "daniele", ... }
 ```
+
+---
+
+## Spring Security integration
+
+Add the security module for `@AuthenticationPrincipal` support:
+
+```xml
+<dependency>
+    <groupId>io.github.danieledalia</groupId>
+    <artifactId>tma-spring-security</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+</dependency>
+```
+
+Then use `@AuthenticationPrincipal` in your controllers:
+
+```java
+@GetMapping("/me")
+public String me(@AuthenticationPrincipal TelegramMiniAppPrincipal principal) {
+    return "Hello, " + principal.user().firstName();
+}
+```
+
+The security module auto-configures a `SecurityFilterChain` that validates the `X-Telegram-Init-Data` header and sets the `SecurityContext`. CSRF is disabled by default (Mini Apps use header-based auth).
 
 ---
 
@@ -93,7 +126,7 @@ const user = await response.json();
 | ------------------------- | ------------------------------------------------------------ |
 | `tma-core`                | Pure Java parser & HMAC-SHA256 validator (no Spring)         |
 | `tma-spring-boot-starter` | Auto-configuration, servlet filter, `@TelegramMiniAppUser`  |
-| `tma-spring-security`     | Optional Spring Security `AuthenticationToken` integration   |
+| `tma-spring-security`     | Spring Security filter, `@AuthenticationPrincipal` support   |
 
 ---
 
